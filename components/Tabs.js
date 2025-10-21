@@ -5,9 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 // Import your screens
 import HomeScreen from '../components/HomePage';
 import FavoritesScreen from '../components/Favorites';
-import CartScreen from '../components/Card';
+
 import ProfileScreen from '../components/Profile';
 import MenuScreen from '../components/Menu';
+import CartPage from './CartPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +46,7 @@ export default function MyTabs() {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Favorites" component={FavoritesScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen name="Cart" component={CartPage} />
       <Tab.Screen name="Menu" component={MenuScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

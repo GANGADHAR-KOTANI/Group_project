@@ -12,24 +12,21 @@ import {
   UIManager,
   Animated,
 } from "react-native";
+import { useCart } from "../context/CartContext";
 
-// Enable layout animation safely
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  try {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  } catch (e) {
-    console.log("LayoutAnimation not supported.");
-  }
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-export default function CartPage({ navigation, route }) {
-  const initial = route.params?.cartItems || [];
-  const [items, setItems] = useState(initial);
+export default function CartPage({ navigation }) {
+  const { cartItems, setCartItems } = useCart();
+
   const [subtotal, setSubtotal] = useState(0);
   const [couponAvailable, setCouponAvailable] = useState(false);
   const [couponApplied, setCouponApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [finalTotal, setFinalTotal] = useState(0);
+  const [couponUsedOnce, setCouponUsedOnce] = useState(false);
 
   const congratsScale = useRef(new Animated.Value(0.6)).current;
   const congratsOpacity = useRef(new Animated.Value(0)).current;
@@ -37,58 +34,56 @@ export default function CartPage({ navigation, route }) {
 
   useEffect(() => {
     recalc();
-  }, [items, couponApplied]);
+  }, [cartItems, couponApplied]);
 
   const recalc = () => {
-  const sum = items.reduce((acc, it) => acc + it.price * it.quantity, 0);
-  setSubtotal(sum);
+    const sum = cartItems.reduce((acc, it) => acc + it.price * (it.quantity || 1), 0);
+    setSubtotal(sum);
 
-  const available = sum >= 1000;
-  setCouponAvailable(available);
+    const available = sum >= 1000;
+    setCouponAvailable(available);
 
-  // If subtotal drops below 1000, remove coupon
-  if (!available && couponApplied) {
-    setCouponApplied(false);
-    setDiscount(0);
-    setFinalTotal(sum);
-    return;
-  }
+    const disc = couponApplied && available ? 200 : 0;
+    setDiscount(disc);
+    setFinalTotal(Math.max(0, sum - disc));
 
-  // Apply discount only if user tapped 'Apply' manually
-  const disc = couponApplied ? 200 : 0;
-  setDiscount(disc);
-  setFinalTotal(Math.max(0, sum - disc));
-};
-
+    if (sum < 1000 && couponApplied) {
+      setCouponApplied(false);
+      setCouponUsedOnce(true);
+    }
+  };
 
   const increaseQty = (id) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setItems((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, quantity: it.quantity + 1 } : it))
+    setCartItems((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, quantity: (it.quantity || 1) + 1 } : it))
     );
   };
 
   const decreaseQty = (id) => {
-    const target = items.find((it) => it.id === id);
+    const target = cartItems.find((it) => it.id === id);
     if (!target) return;
 
-    if (target.quantity === 1) {
+    if ((target.quantity || 1) === 1) {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      setItems((prev) => prev.filter((it) => it.id !== id));
+      setCartItems((prev) => prev.filter((it) => it.id !== id));
       return;
     }
 
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setItems((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, quantity: it.quantity - 1 } : it))
+    setCartItems((prev) =>
+      prev.map((it) =>
+        it.id === id ? { ...it, quantity: (it.quantity || 1) - 1 } : it
+      )
     );
   };
 
   const handleApplyCoupon = () => {
     if (!couponAvailable) return;
     setCouponApplied(true);
+    setCouponUsedOnce(false);
 
-    setCongratsText(`🎉 You saved ₹200!`);
+    setCongratsText("🎉 You saved ₹200!");
     congratsScale.setValue(0.6);
     congratsOpacity.setValue(0);
     Animated.parallel([
@@ -114,14 +109,14 @@ export default function CartPage({ navigation, route }) {
         contentContainerStyle={{ paddingBottom: 240 }}
         showsVerticalScrollIndicator={false}
       >
-        {items.length === 0 ? (
+        {cartItems.length === 0 ? (
           <View style={styles.empty}>
             <Text style={{ color: "#777" }}>Your cart is empty. Go add some fresh veggies!</Text>
           </View>
         ) : (
-          items.map((item, index) => (
+          cartItems.map((item, index) => (
             <View key={`${item.id || index}-${item.name}`} style={styles.itemCard}>
-              <Image source={item.image} style={styles.itemImage} />
+              <Image source={{ uri: item.image }} style={styles.itemImage} />
               <View style={{ flex: 1, marginLeft: 12 }}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <Text style={styles.itemPrice}>₹{item.price}</Text>
@@ -132,7 +127,7 @@ export default function CartPage({ navigation, route }) {
                   <Text style={styles.qtyBtnText}>-</Text>
                 </TouchableOpacity>
                 <View style={styles.qtyCount}>
-                  <Text style={styles.qtyCountText}>{item.quantity}</Text>
+                  <Text style={styles.qtyCountText}>{item.quantity || 1}</Text>
                 </View>
                 <TouchableOpacity onPress={() => increaseQty(item.id)} style={styles.qtyBtn}>
                   <Text style={styles.qtyBtnText}>+</Text>
@@ -142,7 +137,7 @@ export default function CartPage({ navigation, route }) {
           ))
         )}
 
-        {couponAvailable && (
+        {couponAvailable && !couponUsedOnce && (
           <TouchableOpacity
             style={[styles.couponCard, couponApplied && styles.couponApplied]}
             activeOpacity={0.9}
@@ -159,7 +154,6 @@ export default function CartPage({ navigation, route }) {
         )}
       </ScrollView>
 
-      {/* Fixed Bottom Section */}
       <View style={styles.bottomFixed}>
         <View style={styles.billContainer}>
           <View style={styles.row}>
@@ -185,7 +179,6 @@ export default function CartPage({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      {/* Congrats Floating */}
       <Animated.View
         pointerEvents="none"
         style={[
@@ -200,11 +193,16 @@ export default function CartPage({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fffef3", padding: 14 },
+  container: { 
+  flex: 1,
+  backgroundColor: "#fffef3",
+  padding: 14,
+  paddingTop: Platform.OS === "android" ? 40 : 60, // 👈 this line adds space under status bar
+},
+
   header: { fontSize: 22, fontWeight: "800", color: "#ff9f0d", marginBottom: 8 },
   itemsArea: { flex: 1 },
   empty: { padding: 30, alignItems: "center" },
-
   itemCard: {
     backgroundColor: "#fff",
     borderRadius: 12,
@@ -232,7 +230,6 @@ const styles = StyleSheet.create({
   qtyBtnText: { fontSize: 18, fontWeight: "900", color: "#555" },
   qtyCount: { minWidth: 34, alignItems: "center", justifyContent: "center", marginHorizontal: 8 },
   qtyCountText: { fontSize: 16, fontWeight: "800" },
-
   couponCard: {
     backgroundColor: "#fff8dc",
     borderColor: "#ffdd7a",
@@ -247,7 +244,6 @@ const styles = StyleSheet.create({
   couponApplied: { backgroundColor: "#ffb300", borderColor: "#ff9f0d" },
   couponTitle: { fontWeight: "900", color: "#b8860b" },
   couponSubtitle: { fontSize: 12, color: "#6b4b00", marginTop: 4 },
-
   bottomFixed: {
     position: "absolute",
     bottom: 0,
@@ -259,7 +255,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#eee",
   },
-
   billContainer: {
     backgroundColor: "#fff",
     borderRadius: 12,
@@ -270,7 +265,6 @@ const styles = StyleSheet.create({
   label: { color: "#555", fontWeight: "700" },
   value: { color: "#333", fontWeight: "900" },
   deliveryText: { marginTop: 8, color: "#666", fontSize: 13 },
-
   buyBtn: {
     backgroundColor: "#ff9f0d",
     padding: 14,
@@ -280,7 +274,6 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   buyText: { color: "#fff", fontSize: 16, fontWeight: "900" },
-
   congrats: {
     position: "absolute",
     left: "10%",
