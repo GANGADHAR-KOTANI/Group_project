@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert , ImageBackground} from "react-native";
 import { styles } from "../styles/styles";
 import users from "../data/users.json";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState("");
@@ -9,6 +11,8 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
 
   const handleRegister = () => {
     if (!name || !email || !password || !confirm) {
@@ -39,54 +43,76 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+    <ImageBackground
+      source={require("../assets/background2.png")} // Use your local image path
+      style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Register</Text>
 
-      <TextInput
-        placeholder="Name"
-        placeholderTextColor="#999"
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-      />
+        <TextInput
+          placeholder="Name"
+          placeholderTextColor="#999"
+          style={styles.input}
+          value={name}
+          onChangeText={setName}
+        />
 
-      <TextInput
-        placeholder="Email"
-        placeholderTextColor="#999"
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-      />
+        <TextInput
+          placeholder="Email"
+          placeholderTextColor="#999"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+        />
 
-      <TextInput
-        placeholder="Password"
-        placeholderTextColor="#999"
-        secureTextEntry
-        style={styles.input}
-        value={password}
-        onChangeText={setPassword}
-      />
+        <TextInput
+          placeholder="Password"
+          placeholderTextColor="#999"
+          secureTextEntry={!showPassword}
+          style={styles.input}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            right: 22,
+            top: "54%",
+            zIndex: 2,
+            padding: 4,
+          }}
+          onPress={() => setShowPassword(!showPassword)}
+        >
+          <MaterialCommunityIcons
+            name={showPassword ? "eye-off-outline" : "eye-outline"}
+            size={28}
+            color="#FCEA5C"
+          />
+        </TouchableOpacity>
 
-      <TextInput
-        placeholder="Confirm Password"
-        placeholderTextColor="#999"
-        secureTextEntry
-        style={styles.input}
-        value={confirm}
-        onChangeText={setConfirm}
-      />
+        <TextInput
+          placeholder="Confirm Password"
+          placeholderTextColor="#999"
+          secureTextEntry={!showPassword}
+          style={styles.input}
+          value={confirm}
+          onChangeText={setConfirm}
+        />
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+        {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.switchText}>
-          Already have an account? Login here
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.switchText}>
+            Already have an account?{" "}
+            <Text style={styles.subText}>Login here</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 }
