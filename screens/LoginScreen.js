@@ -27,7 +27,8 @@ export default function LoginScreen({ navigation }) {
     if (user) {
       setError("");
     //   Alert.alert("Login Success", `Welcome back, ${user.name}!`);
-      navigation.navigate("Animation");
+          navigation.replace('MainTabs'); 
+
     } else {
       setError("Invalid credentials");
     }

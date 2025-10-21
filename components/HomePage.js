@@ -1,110 +1,136 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  Alert,
-} from "react-native";
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useState, useEffect } from 'react';
+import dummyData2 from '../data/DummyData.json';
 
 export default function HomePage({ navigation }) {
-  const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState('');
+  const [selectedType, setSelectedType] = useState('fruits');
+  const [items, setItems] = useState(dummyData2); // full data in state
 
-  const items = [
-    { id: "1", name: "Tomato", price: 40, image: require("../assets/tomato.jpg") },
-    { id: "2", name: "Potato", price: 30, image: require("../assets/potato.jpg") },
-    { id: "3", name: "Carrot", price: 60, image: require("../assets/carrot.jpg") },
-    { id: "4", name: "Onion", price: 45, image: require("../assets/onion.jpg") },
-    { id: "5", name: "Broccoli", price: 120, image: require("../assets/broccoli.jpg") },
-    { id: "6", name: "Cabbage", price: 70, image: require("../assets/cabbage.jpg") },
-    { id: "7", name: "Brinjal", price: 55, image: require("../assets/brinjal.jpg") },
-    { id: "8", name: "Capsicum", price: 90, image: require("../assets/capsicum.jpg") },
-  ];
+  const types = [...new Set(dummyData2.map(item => item.category))];
 
-  const addToCart = (item) => {
-    const existing = cart.find((i) => i.id === item.id);
-    if (existing) {
-      setCart(cart.map((i) => (i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i)));
-    } else {
-      setCart([...cart, { ...item, quantity: 1 }]);
-    }
-    
+  // Filter items by selectedType
+  const filteredItems = items.filter(item => item.category === selectedType);
+
+  const handleSelect = (item) => {
+    navigation.navigate('SelectItem', { item });
   };
 
-  const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      <Image source={item.image} style={styles.photo} />
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.price}>₹{item.price}</Text>
-      <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
-        <Text style={styles.addText}>Add</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const toggleFavorite = (itemId) => {
+    const updatedItems = items.map(item => {
+      if (item.id === itemId) return { ...item, favourite: !item.favourite };
+      return item;
+    });
+    setItems(updatedItems);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>🥦 Fresh Vegetables</Text>
+    <>
+      <StatusBar style="dark" />
+      <View style={styles.container}>
+        <Text style={styles.title}>Hello, Gurunath!</Text>
 
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 120 }}
-      />
+        <View style={styles.searchContainer}>
+          <Ionicons name="search" size={24} color="#666" style={{ marginLeft: 10 }} />
+          <TextInput
+            placeholder="Search here..."
+            style={styles.input}
+            value={search}
+            onChangeText={setSearch}
+          />
+          <TouchableOpacity>
+            <MaterialIcons name="keyboard-voice" size={24} color="#666" style={{ marginRight: 10 }} />
+          </TouchableOpacity>
+        </View>
+      </View>
 
-      <TouchableOpacity
-        style={styles.cartButton}
-        onPress={() => navigation.navigate("Cart", { cartItems: cart })}
-      >
-        <Text style={styles.cartText}>View Cart ({cart.length})</Text>
-      </TouchableOpacity>
-    </View>
+      <ScrollView style={{ flex: 1, padding: 10 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: 10 }}>
+          {types.map(type => (
+            <TouchableOpacity
+              key={type}
+              style={[styles.button, selectedType === type && styles.activeButton]}
+              onPress={() => setSelectedType(type)}
+            >
+              <Text style={{ color: selectedType === type ? '#fff' : '#000' }}>{type.toUpperCase()}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        </ScrollView>
+
+        <FlatList
+          data={filteredItems}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.card}>
+              <TouchableOpacity style={{ flex: 1 }} onPress={() => handleSelect(item)}>
+                <View style={{ flexDirection: 'row' }}>
+                  <Image source={{ uri: item.image }} style={styles.image} />
+                  <View style={{ flex: 1, marginLeft: 10 }}>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text>{item.description}</Text>
+                    <Text style={{ marginTop: 5, fontWeight: 'bold' }}>${item.price}</Text>
+                    <Text>Rating: {item.rating} ⭐</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
+              {/* Heart Icon */}
+              <TouchableOpacity onPress={() => toggleFavorite(item.id)} style={styles.heartButton}>
+                <Ionicons
+                  name={item.favourite ? 'heart' : 'heart-outline'}
+                  size={24}
+                  color={item.favourite ? 'red' : 'gray'}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+      
+    </>
   );
 }
 
-const { width } = Dimensions.get("window");
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fffef3" },
-  title: { fontSize: 24, fontWeight: "700", color: "#ffb300", textAlign: "center", marginVertical: 15 },
-  row: { justifyContent: "space-between", paddingHorizontal: 12, marginBottom: 20 },
-  card: {
-    width: width / 2 - 25,
-    backgroundColor: "#ffffff",
-    borderRadius: 15,
-    paddingVertical: 15,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 4,
+  container: {
+    width: '100%',
+    height: 183,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 51,
+    backgroundColor: '#FCEA5C',
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
+    paddingHorizontal: 20,
   },
-  photo: { width: 90, height: 90, borderRadius: 10, marginBottom: 8, borderWidth: 1, borderColor: "#ffe082" },
-  name: { fontSize: 16, fontWeight: "600", textAlign: "center", color: "#444" },
-  price: { fontSize: 15, color: "#666", marginVertical: 4 },
-  addButton: { marginTop: 5, backgroundColor: "#ffb300", paddingVertical: 6, paddingHorizontal: 20, borderRadius: 20 },
-  addText: { color: "#fff", fontWeight: "700" },
-  cartButton: {
-    position: "absolute",
-    bottom: 25,
-    left: 25,
-    right: 25,
-    backgroundColor: "#ffb300",
-    paddingVertical: 14,
-    borderRadius: 25,
-    alignItems: "center",
-    shadowColor: "#000",
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10, color: '#000' },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    height: 50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
-    shadowRadius: 4,
+    shadowRadius: 3.84,
     elevation: 5,
   },
-  cartText: { color: "#fff", fontSize: 18, fontWeight: "700" },
+  input: { flex: 1, fontSize: 16, marginLeft: 10 },
+  button: { padding: 10, borderRadius: 20, borderWidth: 1, borderColor: '#000' },
+  activeButton: { backgroundColor: '#FCEA5C' },
+  card: {
+    flexDirection: 'row',
+    marginVertical: 8,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2,
+    position: 'relative',
+  },
+  image: { width: 80, height: 80, borderRadius: 10 },
+  name: { fontWeight: 'bold', fontSize: 16 },
+  heartButton: { position: 'absolute', top: 10, right: 10, zIndex: 10 },
 });
