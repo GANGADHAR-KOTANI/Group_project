@@ -25,7 +25,7 @@ const AnimationScreen = ({ navigation }) => {
         style={styles.logoContainer}
       >
         <Image
-          source={require("../assets/LodingLogo.jpg")} // Animation Log Path
+          source={require("../assets/LodingLogo.jpeg")} // Animation Log Path
           style={styles.logo}
           resizeMode="contain"
         />

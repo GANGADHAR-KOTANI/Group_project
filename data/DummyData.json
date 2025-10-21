@@ -1,0 +1,402 @@
+[
+  {
+    "id": "v1",
+    "name": "Tomato",
+    "description": "Fresh red tomatoes perfect for salads and cooking.",
+    "image": "https://media.istockphoto.com/id/847335116/photo/tomatoes-on-the-vine.jpg?s=612x612&w=0&k=20&c=XspM2ySvUfqjnt7HL5qKyn0tyRb5qLsf1GAP6-3xQsw=",
+    "price": 40,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v2",
+    "name": "Potato",
+    "description": "Organic farm-grown potatoes for everyday use.",
+    "image": "https://media.istockphoto.com/id/157430678/photo/three-potatoes.jpg?s=612x612&w=0&k=20&c=qkMoEgcj8ZvYbzDYEJEhbQ57v-nmkHS7e88q8dv7TSA=",
+    "price": 30,
+    "rating": 4.2,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v3",
+    "name": "Onion",
+    "description": "Crisp onions that add flavor to every dish.",
+    "image": "https://media.istockphoto.com/id/499146870/photo/red-onions.jpg?s=612x612&w=0&k=20&c=OaZUynAtxIJyPaSgAsAGWwAbpTs_EfKF5zT_UvBDpbY=",
+    "price": 35,
+    "rating": 4.4,
+    "favourite": true,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v4",
+    "name": "Carrot",
+    "description": "Sweet and crunchy carrots full of nutrition.",
+    "image": "https://media.istockphoto.com/id/1388403435/photo/fresh-carrots-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=XmrTb_nASc7d-4zVKUz0leeTT4fibDzWi_GpIun0Tlc=",
+    "price": 50,
+    "rating": 4.6,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v5",
+    "name": "Cabbage",
+    "description": "Fresh green cabbage ideal for salads and curries.",
+    "image": "https://img.freepik.com/free-photo/fresh-cabbage-table_58702-2105.jpg?semt=ais_hybrid&w=740&q=80",
+    "price": 25,
+    "rating": 4.1,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v6",
+    "name": "Brinjal",
+    "description": "Brinjal is a nutritious vegetable rich in fiber.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq2r7Zu7Ya2ofpB7ik0n2CLnaEjovA2VO7eQ&s",
+    "price": 80,
+    "rating": 4.7,
+    "favourite": true,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v7",
+    "name": "Cabbage",
+    "description": "Fresh cabbage for a healthy diet.",
+    "image": "https://img.freepik.com/free-photo/fresh-cabbage-table_58702-2105.jpg?semt=ais_hybrid&w=740&q=80",
+    "price": 20,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v8",
+    "name": "Cauliflower",
+    "description": "White cauliflower, fresh and healthy.",
+    "image": "https://m.media-amazon.com/images/I/91EdPVzD99L._AC_UF1000,1000_QL80_.jpg",
+    "price": 45,
+    "rating": 4.3,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v9",
+    "name": "Beans",
+    "description": "Long green beans packed with fiber.",
+    "image": "https://img.freepik.com/free-photo/mountain-almonds_1203-908.jpg?semt=ais_hybrid&w=740&q=80",
+    "price": 55,
+    "rating": 4.4,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "v10",
+    "name": "Spinach",
+    "description": "Shiny spinach, fresh from the farm.",
+    "image": "https://www.orgpick.com/cdn/shop/products/spnach_large_01cac1a1-246f-433c-b02b-e2c7986fe95c.jpg?v=1569550040",
+    "price": 30,
+    "rating": 4.0,
+    "favourite": false,
+    "category": "Vegetables"
+  },
+  {
+    "id": "f1",
+    "name": "Apple",
+    "description": "Crisp and juicy apples sourced from local farms.",
+    "image": "https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=",
+    "price": 120,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Fruits"
+  },
+  {
+    "id": "f2",
+    "name": "Banana",
+    "description": "Ripe yellow bananas full of potassium.",
+    "image": "https://thumbs.dreamstime.com/b/bunch-bananas-6175887.jpg",
+    "price": 60,
+    "rating": 4.6,
+    "favourite": false,
+    "category": "Fruits"
+  },
+  {
+    "id": "f3",
+    "name": "Orange",
+    "description": "Sweet and tangy oranges full of vitamin C.",
+    "image": "https://media.istockphoto.com/id/477836156/photo/orange-fruit-isolated-on-white.jpg?s=612x612&w=0&k=20&c=NQYciPqF0kRqnDMx7Vy96Qhtx2c37OiKPXtjMR3Oy-Y=",
+    "price": 90,
+    "rating": 4.7,
+    "favourite": true,
+    "category": "Fruits"
+  },
+  {
+    "id": "f4",
+    "name": "Grapes",
+    "description": "Fresh seedless grapes, great for snacking.",
+    "image": "https://png.pngtree.com/png-vector/20241225/ourmid/pngtree-delicious-black-grapes-png-image_14877346.png",
+    "price": 100,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Fruits"
+  },
+  {
+    "id": "f5",
+    "name": "Pineapple",
+    "description": "Tropical pineapple with rich flavor.",
+    "image": "https://www.shutterstock.com/image-photo/pineapple-cut-half-isolated-on-260nw-2536966247.jpg",
+    "price": 80,
+    "rating": 4.3,
+    "favourite": false,
+    "category": "Fruits"
+  },
+  {
+    "id": "f6",
+    "name": "Papaya",
+    "description": "Fresh papayas rich in vitamins and fiber.",
+    "image": "https://img.freepik.com/free-photo/tasty-papaya-still-life_23-2151580898.jpg?semt=ais_hybrid&w=740&q=80",
+    "price": 70,
+    "rating": 4.4,
+    "favourite": false,
+    "category": "Fruits"
+  },
+  {
+    "id": "f7",
+    "name": "Strawberry",
+    "description": "Sweet and juicy strawberries.",
+    "image": "https://www.shutterstock.com/image-photo/ripe-fresh-strawberries-green-leaves-260nw-2610323315.jpg",
+    "price": 150,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Fruits"
+  },
+  {
+    "id": "f8",
+    "name": "Mango",
+    "description": "Delicious mangoes, the king of fruits.",
+    "image": "https://www.shutterstock.com/image-photo/fresh-mango-on-tree-garden-260nw-2617161019.jpg",
+    "price": 120,
+    "rating": 4.9,
+    "favourite": true,
+    "category": "Fruits"
+  },
+  {
+    "id": "f9",
+    "name": "Watermelon",
+    "description": "Refreshing watermelon slices for hot days.",
+    "image": "https://media.istockphoto.com/id/1142119394/photo/whole-and-slices-watermelon-fruit-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=A5XnLyeI_3mwkCNadv-QLU4jzgNux8kUPfIlDvwT0jo=",
+    "price": 50,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Fruits"
+  },
+  {
+    "id": "f10",
+    "name": "Pomegranate",
+    "description": "Rich red pomegranates full of antioxidants.",
+    "image": "https://t3.ftcdn.net/jpg/04/32/47/36/360_F_432473688_NBFaMH9L7Ls0kvAxnCZnRlvbCaSgxozB.jpg",
+    "price": 110,
+    "rating": 4.6,
+    "favourite": true,
+    "category": "Fruits"
+  },
+  {
+    "id": "d1",
+    "name": "Coca-Cola",
+    "description": "Chilled soft drink with classic taste.",
+    "image": "https://images.unsplash.com/photo-1667204651371-5d4a65b8b5a9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29jYSUyMGNvbGF8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000",
+    "price": 40,
+    "rating": 4.6,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "d2",
+    "name": "Pepsi",
+    "description": "Refreshing carbonated beverage.",
+    "image": "https://images.unsplash.com/photo-1629203849820-fdd70d49c38e",
+    "price": 40,
+    "rating": 4.4,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "d3",
+    "name": "Mango Juice",
+    "description": "Sweet mango pulp juice.",
+    "image": "https://www.jiomart.com/images/product/original/490997880/maaza-mango-drink-1-5-l-product-images-o490997880-p490997880-0-202304021324.jpg",
+    "price": 60,
+    "rating": 4.7,
+    "favourite": true,
+    "category": "Drinks"
+  },
+  {
+    "id": "d4",
+    "name": "Lassi",
+    "description": "Refreshing yogurt-based Indian drink.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmOmh3y4eNmBjlUDuWt0-NBKZjpKBPSzcoKA&s",
+    "price": 50,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Drinks"
+  },
+  {
+    "id": "d5",
+    "name": "Sprite",
+    "description": "Chill with sprite.",
+    "image": "https://images.unsplash.com/photo-1680404005217-a441afdefe83",
+    "price": 80,
+    "rating": 4.6,
+    "favourite": true,
+    "category": "Drinks"
+  },
+  {
+    "id": "d6",
+    "name": "Lemon Soda",
+    "description": "Tangy lemon soda perfect for summer.",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40315661_1-dailee-lemon-salt-soda.jpg",
+    "price": 35,
+    "rating": 4.3,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "d7",
+    "name": "Orange Juice",
+    "description": "Fresh orange juice with no preservatives.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNjxuZo1PeMFANzyNN5SodAVHKP4wXqUFYdg&s",
+    "price": 70,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Drinks"
+  },
+  {
+    "id": "d8",
+    "name": "Milkshake",
+    "description": "Thick and creamy milkshake with vanilla flavor.",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40181677_4-amul-banana-milk-shake.jpg",
+    "price": 90,
+    "rating": 4.7,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "d9",
+    "name": "Green Tea",
+    "description": "Healthy green tea rich in antioxidants.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWybuCrXGDMnDn3siQr9CQ_JHE2kY1NIwUw&s",
+    "price": 50,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "d10",
+    "name": "Red Bull",
+    "description": "Boost your energy instantly.",
+    "image": "https://media.istockphoto.com/id/458735615/photo/red-bull-can-in-ice.jpg?s=612x612&w=0&k=20&c=pbHCB92pg_LkYRiWPMLI6nYWO2sefI7tmPwZLmQxSQA=",
+    "price": 100,
+    "rating": 4.6,
+    "favourite": false,
+    "category": "Drinks"
+  },
+  {
+    "id": "b1",
+    "name": "White Bread",
+    "description": "Soft and fresh white bread loaf.",
+    "image": "https://www.allrecipes.com/thmb/FcoT_ZL76jZomB-qOBf8v5duZ5A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-20066-traditional-white-bread-DDMFS-4x3-f8e3aac2eee948dfacca38c877c59d14.jpg",
+    "price": 40,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b2",
+    "name": "Brown Bread",
+    "description": "Healthy brown bread with wheat fiber.",
+    "image": "https://t4.ftcdn.net/jpg/02/93/19/39/360_F_293193927_FYiG8xTxypXmMaeOOHDcLoLYG2ATHesM.jpg",
+    "price": 45,
+    "rating": 4.6,
+    "favourite": true,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b3",
+    "name": "Multigrain Bread",
+    "description": "Wholesome bread with multiple grains.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAC4BacXoRr_QeboPealR4b8ez4cbv4DVyMQ&s",
+    "price": 50,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b4",
+    "name": "Eggs (6 pcs)",
+    "description": "Farm fresh white eggs pack of 6.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTO-QRQl8_UA0CL9_xqx_ORKe3z4e2nYTFNA&s",
+    "price": 60,
+    "rating": 4.7,
+    "favourite": false,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b5",
+    "name": "Eggs (12 pcs)",
+    "description": "Farm fresh white eggs pack of 12.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTO-QRQl8_UA0CL9_xqx_ORKe3z4e2nYTFNA&s",
+    "price": 110,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b6",
+    "name": "Croissant",
+    "description": "Buttery French croissants, freshly baked.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReXqRrEbcPNx_oGNGd2813LPRDduR3cjKa_Q&s",
+    "price": 70,
+    "rating": 4.7,
+    "favourite": true,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b7",
+    "name": "Burger Bun",
+    "description": "Soft burger buns pack of 2.",
+    "image": "https://handletheheat.com/wp-content/uploads/2023/04/homemade-burger-buns-SQUARE.jpg",
+    "price": 35,
+    "rating": 4.4,
+    "favourite": false,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b8",
+    "name": "Pav",
+    "description": "Indian pav buns for pav bhaji and vada pav.",
+    "image": "https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=0&k=20&c=Yy3pm53KrPAnZXL9weCJDzXjxa2My34oVFx7RBCPmZ8=",
+    "price": 25,
+    "rating": 4.5,
+    "favourite": false,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b9",
+    "name": "Donut",
+    "description": "Sweet donut with sugar glaze.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_NV5KfsQi7eZzcYyQ26BGp93xh7q6AdRxKA&s",
+    "price": 60,
+    "rating": 4.8,
+    "favourite": true,
+    "category": "Daily Bread & Eggs"
+  },
+  {
+    "id": "b10",
+    "name": "Muffin",
+    "description": "Soft chocolate chip muffin.",
+    "image": "https://media.istockphoto.com/id/457189561/photo/chocolate-chips-muffin.jpg?s=612x612&w=0&k=20&c=iq26qoUSUkSdE2yaKWPCQKxg0BICqc-roKM0JhO8UAc=",
+    "price": 50,
+    "rating": 4.6,
+    "favourite": false,
+    "category": "Daily Bread & Eggs"
+  }
+]

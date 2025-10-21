@@ -8,7 +8,8 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import AnimationScreen from "./screens/AnimationScreen";
 
-
+import MyTabs from "./components/Tabs";
+import SelectItemPage from "./components/SelectedItem";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -22,12 +23,15 @@ export default function App() {
           headerShown: false
         }}
       >
-        <Stack.Screen name="Home" component={HomePage} options={{ title: "Fresh Market" }} />
-        <Stack.Screen name="Cart" component={CartPage} options={{ title: "Your Cart" }} />
-
+        
+        {/* App starts with tabs */}
+        <Stack.Screen name="MainTabs" component={MyTabs} />
+        {/* Screens outside tab (tab bar hidden) */}
+        <Stack.Screen name="SelectItem" component={SelectItemPage} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Animation" component={AnimationScreen} />
+        
+        {/* <Stack.Screen name="Animation" component={AnimationScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
