@@ -9,7 +9,9 @@ import CartPage from "./components/CartPage";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import AnimationScreen from "./screens/AnimationScreen"; // optional
-
+import DeliveryAddressScreen from "./components/DeliveryAddressScreen";
+import OrderSummaryScreen from "./components/OrderSummaryScreen";
+import PaymentScreen from "./components/PaymentScreen";
 
 import FirstScreen from "./screens/FirstScreen";
 import OrganicDeliveryScreen from "./screens/OrganicDeliveryScreen";
@@ -53,6 +55,9 @@ export default function App() {
             component={OrganicDeliveryScreen}
           />
           <Stack.Screen name="FastDelivery" component={FastDeliveryScreen} />
+          <Stack.Screen name="DeliveryAddress" component={DeliveryAddressScreen} />
+        <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} />
+        <Stack.Screen name="Payment" component={PaymentScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartProvider>
