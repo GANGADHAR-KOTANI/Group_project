@@ -2,9 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, LayoutAnimation, Platform, UIManager, Animated, Alert } from "react-native";
 import { useCart } from "../context/CartContext";
 
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental &&
+  !global._layoutAnimWarnSilenced
+) {
+  try {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  } catch (e) {}
+  global._layoutAnimWarnSilenced = true;
 }
+
 
 export default function CartPage({ navigation }) {
   const { cartItems, setCartItems, removeFromCart } = useCart();

@@ -3,16 +3,26 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CartProvider } from "./context/CartContext";
 
+// 🏠 Bottom Tabs (Main Navigation)
 import MyTabs from "./components/Tabs";
+
+// 🛒 Product and Cart Flow
 import SelectItemPage from "./components/SelectedItem";
 import CartPage from "./components/CartPage";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import AnimationScreen from "./screens/AnimationScreen"; // optional
+import CategoryScreen from "./components/CategoryScreen";
 import DeliveryAddressScreen from "./components/DeliveryAddressScreen";
 import OrderSummaryScreen from "./components/OrderSummaryScreen";
 import PaymentScreen from "./components/PaymentScreen";
+import OrderSuccessScreen from "./components/OrderSuccessScreen";
 
+
+
+// 🔐 Authentication Screens
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+
+// 🎬 Animation and Intro Screens
+import AnimationScreen from "./screens/AnimationScreen";
 import FirstScreen from "./screens/FirstScreen";
 import OrganicDeliveryScreen from "./screens/OrganicDeliveryScreen";
 import FastDeliveryScreen from "./screens/FastDeliveryScreen";
@@ -26,38 +36,36 @@ export default function App() {
         <Stack.Navigator
           initialRouteName="FirstScreen"
           screenOptions={{
+            headerShown: false, // hides headers for all pages
             headerStyle: { backgroundColor: "#fff8dc" },
             headerTitleStyle: { color: "#ff9f0d", fontWeight: "700" },
-            headerShown: false,
           }}
         >
-          {/* Bottom Tabs (main app area) */}
+          {/* 🌿 Main Tab Navigation */}
           <Stack.Screen name="MyTabs" component={MyTabs} />
 
-          {/* Product Details */}
+          {/* 🛍 Product Flow */}
           <Stack.Screen name="SelectItem" component={SelectItemPage} />
-
-          {/* Cart Page (linked from View Cart button) */}
           <Stack.Screen name="Cart" component={CartPage} />
+          <Stack.Screen name="Category" component={CategoryScreen} />
 
-          {/* Auth Screens */}
+          {/* 🧾 Checkout Flow */}
+          <Stack.Screen name="DeliveryAddress" component={DeliveryAddressScreen} />
+          <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} />
+          <Stack.Screen name="Payment" component={PaymentScreen} />
+          <Stack.Screen name="OrderSuccess" component={OrderSuccessScreen} />
+
+
+
+          {/* 🔐 Auth Screens */}
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
 
-          {/* Optional Animation */}
+          {/* 🎬 Intro & Animation */}
           <Stack.Screen name="Animation" component={AnimationScreen} />
-
-          {/* First Three Pages */}
-
           <Stack.Screen name="FirstScreen" component={FirstScreen} />
-          <Stack.Screen
-            name="OrganicDelivery"
-            component={OrganicDeliveryScreen}
-          />
+          <Stack.Screen name="OrganicDelivery" component={OrganicDeliveryScreen} />
           <Stack.Screen name="FastDelivery" component={FastDeliveryScreen} />
-          <Stack.Screen name="DeliveryAddress" component={DeliveryAddressScreen} />
-        <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} />
-        <Stack.Screen name="Payment" component={PaymentScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartProvider>
