@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, FlatList, Image, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import data from '../data/DummyData.json';
 
 export default function Favorites({ navigation }) {
@@ -14,23 +14,28 @@ export default function Favorites({ navigation }) {
     <TouchableOpacity
       style={styles.itemContainer}
       onPress={() => navigation.navigate('SelectItem', { item })}
+      activeOpacity={0.8}
     >
       <Image source={{ uri: item.image }} style={styles.itemImage} />
-      <View style={styles.itemTextContainer}>
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemPrice}>${item.price}</Text>
-        <Text style={styles.itemRating}>⭐ {item.rating}</Text>
-      </View>
+      <Text style={styles.itemName} numberOfLines={1}>{item.name}</Text>
+      <Text style={styles.itemPrice}>₹{item.price}</Text>
+      <Text style={styles.itemRating}>⭐ {item.rating}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <Text style={styles.header}>Favourites ❤️</Text>
+
       <FlatList
         data={fav}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        numColumns={2} // 👈 two-column grid layout
+        columnWrapperStyle={styles.row}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 120 }}
       />
     </View>
   );
@@ -40,40 +45,54 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40, // safe padding for top
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#050302ff',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  row: {
+    justifyContent: 'space-between', // equal spacing for 2 items
+    marginBottom: 12,
   },
   itemContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#f9f9f9',
-    marginBottom: 12,
-    borderRadius: 10,
-    overflow: 'hidden',
-    elevation: 2, // shadow for Android
-    shadowColor: '#000', // shadow for iOS
+    backgroundColor: '#fffaf2',
+    borderRadius: 12,
+    alignItems: 'center',
+    padding: 10,
+    flex: 1,
+    marginHorizontal: 4,
+    elevation: 3,
+    shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
   },
   itemImage: {
-    width: 100,
-    height: 100,
-  },
-  itemTextContainer: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'center',
+    width: 120,
+    height: 120,
+    borderRadius: 10,
+    marginBottom: 8,
   },
   itemName: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#333',
+    textAlign: 'center',
   },
   itemPrice: {
     fontSize: 14,
     color: '#ff6347',
+    fontWeight: 'bold',
     marginTop: 4,
   },
   itemRating: {
     fontSize: 12,
-    color: 'gray',
+    color: '#777',
     marginTop: 2,
   },
 });
