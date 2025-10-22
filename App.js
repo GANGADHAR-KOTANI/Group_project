@@ -8,7 +8,12 @@ import SelectItemPage from "./components/SelectedItem";
 import CartPage from "./components/CartPage";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-// import AnimationScreen from "./screens/AnimationScreen"; // optional
+import AnimationScreen from "./screens/AnimationScreen"; // optional
+
+
+import FirstScreen from "./screens/FirstScreen";
+import OrganicDeliveryScreen from "./screens/OrganicDeliveryScreen";
+import FastDeliveryScreen from "./screens/FastDeliveryScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,7 +22,7 @@ export default function App() {
     <CartProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="FirstScreen"
           screenOptions={{
             headerStyle: { backgroundColor: "#fff8dc" },
             headerTitleStyle: { color: "#ff9f0d", fontWeight: "700" },
@@ -25,7 +30,7 @@ export default function App() {
           }}
         >
           {/* Bottom Tabs (main app area) */}
-          <Stack.Screen name="MainTabs" component={MyTabs} />
+          <Stack.Screen name="MyTabs" component={MyTabs} />
 
           {/* Product Details */}
           <Stack.Screen name="SelectItem" component={SelectItemPage} />
@@ -38,7 +43,16 @@ export default function App() {
           <Stack.Screen name="Register" component={RegisterScreen} />
 
           {/* Optional Animation */}
-          {/* <Stack.Screen name="Animation" component={AnimationScreen} /> */}
+          <Stack.Screen name="Animation" component={AnimationScreen} />
+
+          {/* First Three Pages */}
+
+          <Stack.Screen name="FirstScreen" component={FirstScreen} />
+          <Stack.Screen
+            name="OrganicDelivery"
+            component={OrganicDeliveryScreen}
+          />
+          <Stack.Screen name="FastDelivery" component={FastDeliveryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartProvider>
