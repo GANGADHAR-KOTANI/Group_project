@@ -28,5 +28,47 @@
     "username": "keerthi",
     "email": "keerthi@example.com",
     "password": "keerthi99"
+  },
+  {
+    "id": 6,
+    "username": "Guru",
+    "email": "guru@gmail.com",
+    "password": "123456"
+
+  },
+  {
+    "id": 7,
+    "username": "gowtham",
+    "email": "gowtham@gmail.com",
+    "password": "123456"
+
+  },
+  {
+    "id": 8,
+    "username": "Lachi",
+    "email": "lachi@gmail.com",
+    "password": "123456"
+
+  },
+  {
+    "id": 9,
+    "username": "sudha",
+    "email": "sudha@gmail.com",
+    "password": "123456"
+
+  },
+  {
+    "id": 10,
+    "username": "likhitha",
+    "email": "likhitha@gmail.com",
+    "password": "123456"
+
+  },
+  {
+    "id": 11,
+    "username": "akhila",
+    "email": "akhila@gmail.com",
+    "password": "123456"
+
   }
 ]

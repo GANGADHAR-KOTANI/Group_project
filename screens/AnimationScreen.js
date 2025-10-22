@@ -8,7 +8,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const AnimationScreen = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace("Home"); // navigate after 3s
+      navigation.replace("MyTabs"); // navigate after 3s
     }, 3000);
 
     return () => clearTimeout(timer);

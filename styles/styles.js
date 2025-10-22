@@ -2,11 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
     backgroundColor: "#F8F9FA",
+    margin: 9,
+    borderRadius: 10,
   },
   title: {
     fontSize: 28,
@@ -39,9 +41,12 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   switchText: {
-    color: "#FCEA5C",
+    color: "#000000",
     marginTop: 15,
     fontSize: 14,
+  },
+  subText: {
+    color: "#FCEA5C",
   },
   error: {
     color: "red",
