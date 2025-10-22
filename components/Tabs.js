@@ -1,9 +1,7 @@
-
-
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 // Import your screens
 import HomeScreen from '../components/HomePage';
@@ -20,28 +18,32 @@ export default function MyTabs() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: true,
-        tabBarActiveTintColor: '#FCEA5C', // 🌟 your yellow theme
+        tabBarActiveTintColor: '#FCEA5C',
         tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {
-          backgroundColor: '#fff',
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-          right: 10,
-          borderRadius: 25,
-          height: 65,
-          shadowColor: '#000',
-          shadowOpacity: 0.15,
-          shadowRadius: 6,
-          elevation: 6,
-          borderTopWidth: 0,
-        },
+        tabBarStyle: [
+          {
+            backgroundColor: '#fff',
+            position: 'absolute',
+            bottom: 10,
+            left: 10,
+            right: 10,
+            borderRadius: 25,
+            height: 65,
+            shadowColor: '#000',
+            shadowOpacity: 0.15,
+            shadowRadius: 6,
+            elevation: 6,
+            borderTopWidth: 0,
+          },
+          // 👇 Hide tab bar when on Cart screen
+          route.name === 'Cart' ? { display: 'none' } : null,
+        ],
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
           paddingBottom: 5,
         },
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color }) => {
           let iconName;
 
           if (route.name === 'Home') iconName = focused ? 'home' : 'home-outline';

@@ -10,8 +10,12 @@ import {
 import { styles } from "../styles/styles";
 import users from "../data/users.json";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useCart } from "../context/CartContext"; // ✅ Correct hook
 
 export default function RegisterScreen({ navigation }) {
+  const { registerUser } = useCart(); // ✅ Correct hook usage
+
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,32 +24,48 @@ export default function RegisterScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = () => {
-    if (!name || !email || !password || !confirm) {
-      setError("All fields are required");
-      return;
-    }
+  if (!name || !email || !password || !confirm) {
+    setError("All fields are required");
+    return;
+  }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.trim())) {
-      setError("Invalid email address");
-      return;
-    }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.trim())) {
+    setError("Invalid email address");
+    return;
+  }
 
-    if (password !== confirm) {
-      setError("Passwords do not match");
-      return;
-    }
+  if (password !== confirm) {
+    setError("Passwords do not match");
+    return;
+  }
 
-    const existing = users.find((u) => u.email === email.trim());
-    if (existing) {
-      setError("User already exists");
-      return;
-    }
+  const existing = users.find((u) => u.email === email.trim());
+  if (existing) {
+    setError("User already exists");
+    return;
+  }
 
-    users.push({ name, email, password });
-    Alert.alert("Success", "User registered successfully!");
-    navigation.navigate("Login");
+  // ✅ Create a new user object
+  const newUser = {
+    id: users.length + 1,
+    username: name,
+    email,
+    password,
+    mobile: "9999999999", // You can later collect this from a TextInput
   };
+
+  users.push(newUser);
+  registerUser(newUser); // ✅ store in context
+
+  Alert.alert("Success", "User registered successfully!", [
+    {
+      text: "OK",
+      onPress: () => navigation.navigate("Login"), // ✅ Navigate to Login after success
+    },
+  ]);
+};
+
 
   return (
     <ImageBackground

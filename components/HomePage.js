@@ -4,8 +4,12 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image } 
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useState } from 'react';
 import dummyData2 from '../data/DummyData.json';
+import { useCart } from "../context/CartContext";
+
 
 export default function HomePage({ navigation }) {
+  const { user } = useCart();
+
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState('Vegetables');
   const [items, setItems] = useState(dummyData2);
@@ -35,7 +39,10 @@ export default function HomePage({ navigation }) {
 
       {/* HEADER SECTION */}
       <View style={styles.headerContainer}>
-        <Text style={styles.title}>Hello, Sudha!</Text>
+        <Text style={styles.title}>
+  Hello, {user?.username ? user.username : "Guest"}!
+</Text>
+
 
         <View style={styles.searchContainer}>
           <Ionicons name="search" size={24} color="#666" style={{ marginLeft: 10 }} />

@@ -5,10 +5,11 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(null); // store logged-in or registered user
 
+  // 🛒 CART FUNCTIONS
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      // if already in cart, increase quantity
       const existingItem = prevItems.find((it) => it.id === item.id);
       if (existingItem) {
         return prevItems.map((it) =>
@@ -25,9 +26,32 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCartItems([]);
 
+  // 👤 USER FUNCTIONS
+  const registerUser = (userData) => {
+    setUser(userData); // store user info during registration
+  };
+
+  const loginUser = (userData) => {
+    setUser(userData); // store user info during login
+  };
+
+  const logoutUser = () => {
+    setUser(null);
+    clearCart();
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, removeFromCart, clearCart }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        user,
+        registerUser,
+        loginUser,
+        logoutUser,
+      }}
     >
       {children}
     </CartContext.Provider>
