@@ -27,14 +27,8 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => setCartItems([]);
 
   // 👤 USER FUNCTIONS
-  const registerUser = (userData) => {
-    setUser(userData); // store user info during registration
-  };
-
-  const loginUser = (userData) => {
-    setUser(userData); // store user info during login
-  };
-
+  const registerUser = (userData) => setUser(userData);
+  const loginUser = (userData) => setUser(userData);
   const logoutUser = () => {
     setUser(null);
     clearCart();
@@ -44,6 +38,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        setCartItems,      // ✅ Add this line
         addToCart,
         removeFromCart,
         clearCart,
