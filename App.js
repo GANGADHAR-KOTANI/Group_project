@@ -27,6 +27,7 @@ import FirstScreen from "./screens/FirstScreen";
 import OrganicDeliveryScreen from "./screens/OrganicDeliveryScreen";
 import FastDeliveryScreen from "./screens/FastDeliveryScreen";
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -62,8 +63,8 @@ export default function App() {
           <Stack.Screen name="Register" component={RegisterScreen} />
 
           {/* 🎬 Intro & Animation */}
-          <Stack.Screen name="Animation" component={AnimationScreen} />
-          <Stack.Screen name="FirstScreen" component={FirstScreen} />
+          <Stack.Screen name="Animation" component={AnimationScreen} /> 
+           <Stack.Screen name="FirstScreen" component={FirstScreen} />
           <Stack.Screen name="OrganicDelivery" component={OrganicDeliveryScreen} />
           <Stack.Screen name="FastDelivery" component={FastDeliveryScreen} />
         </Stack.Navigator>
