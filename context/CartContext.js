@@ -7,7 +7,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState(null); // store logged-in or registered user
 
-  // 🛒 CART FUNCTIONS
+  // 🛒 Add item to cart
   const addToCart = (item) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((it) => it.id === item.id);
@@ -20,31 +20,51 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // ➕ Increase item quantity
+  const increaseQuantity = (id) => {
+    setCartItems((prevItems) =>
+      prevItems.map((it) =>
+        it.id === id ? { ...it, quantity: (it.quantity || 1) + 1 } : it
+      )
+    );
+  };
+
+  // ➖ Decrease item quantity
+  const decreaseQuantity = (id) => {
+    setCartItems((prevItems) =>
+      prevItems
+        .map((it) =>
+          it.id === id ? { ...it, quantity: Math.max((it.quantity || 1) - 1, 0) } : it
+        )
+        .filter((it) => it.quantity > 0)
+    );
+  };
+
+  // ❌ Remove item from cart
   const removeFromCart = (id) => {
     setCartItems((prevItems) => prevItems.filter((it) => it.id !== id));
   };
 
+  // 🧹 Clear all cart items
   const clearCart = () => setCartItems([]);
 
   // 👤 USER FUNCTIONS
-  const registerUser = (userData) => {
-    setUser(userData); // store user info during registration
-  };
-
-  const loginUser = (userData) => {
-    setUser(userData); // store user info during login
-  };
-
+  const registerUser = (userData) => setUser(userData);
+  const loginUser = (userData) => setUser(userData);
   const logoutUser = () => {
     setUser(null);
     clearCart();
   };
 
+  // ✅ Export everything including setCartItems so it can be used in CartPage
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        setCartItems, // <--- added this back to fix your error
         addToCart,
+        increaseQuantity,
+        decreaseQuantity,
         removeFromCart,
         clearCart,
         user,

@@ -7,16 +7,12 @@ export default function OrderSummaryScreen({ route, navigation }) {
   const { addressInfo, total } = route.params;
   const { cartItems, clearCart } = useCart();
   const [visible, setVisible] = useState(false);
+  
 
-  const handleShowAlert = () => {
-    setVisible(true);
-    setTimeout(() => {
-      setVisible(false);
-      clearCart();
-      navigation.navigate("MyTabs"); // redirect to home after success
-    }, 4000);
-  };
-
+  const MoveToPayment =()=>{
+            navigation.navigate('Payment',{total:total})
+  }
+ 
   return (
     <LinearGradient
       colors={["#fff8dc", "#fff"]}
@@ -56,32 +52,17 @@ export default function OrderSummaryScreen({ route, navigation }) {
         </View>
 
         {/* Place Order Button */}
-        <TouchableOpacity style={styles.button} onPress={handleShowAlert}>
+        <TouchableOpacity style={styles.button} onPress={MoveToPayment}>
           <LinearGradient
             colors={["#ffb84d", "#ff9f0d"]}
             style={styles.buttonGradient}
           >
-            <Text style={styles.buttonText}>Place Order ✅</Text>
+            <Text style={styles.buttonText}>Proceed✅</Text>
           </LinearGradient>
         </TouchableOpacity>
 
         {/* Modal Success Popup */}
-        <Modal transparent={true} visible={visible} animationType="fade">
-          <View style={styles.overlay}>
-            <View style={styles.alertBox}>
-              <Image
-                source={{
-                  uri: "https://cdn-icons-png.flaticon.com/512/190/190411.png",
-                }}
-                style={styles.alertImage}
-              />
-              <Text style={styles.alertTitle}>Success!</Text>
-              <Text style={styles.alertMessage}>
-                Your order has been placed successfully 🎉
-              </Text>
-            </View>
-          </View>
-        </Modal>
+        
       </View>
     </LinearGradient>
   );
@@ -212,3 +193,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
